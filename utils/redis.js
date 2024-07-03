@@ -2,7 +2,6 @@ import redis from 'redis';
 
 class RedisClient {
   constructor() {
-    this.client = redis.createClient();
     this.client = redis.createClient({
         host: '127.0.0.1',
         port: 6379

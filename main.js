@@ -1,18 +1,13 @@
 import redisClient from './utils/redis';
 
 (async () => {
-  // Check if Redis is alive
-  console.log('Redis alive:', redisClient.isAlive());
+    console.log(redisClient.isAlive());
+    console.log(await redisClient.get('myKey'));
+    await redisClient.set('myKey', 12, 5);
+    console.log(await redisClient.get('myKey'));
 
-  // Set a key in Redis
-  await redisClient.set('myKey', 'myValue', 3600);
-  console.log('Key set');
-
-  // Get the key from Redis
-  const value = await redisClient.get('myKey');
-  console.log('Value:', value);
-
-  // Delete the key from Redis
-  await redisClient.del('myKey');
-  console.log('Key deleted');
+    setTimeout(async () => {
+        console.log(await redisClient.get('myKey'));
+    }, 1000*10)
 })();
+
